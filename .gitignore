@@ -1,14 +1,32 @@
-venv/
+# --- Python ---
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
-*.sqlite3
-.DS_Store
-.env
-*.log
-*.pt
 
-data/
+# --- Virtual environment ---
+venv/
+.env/
+
+# --- Django ---
+db.sqlite3
+/static/
+/staticfiles/
+/media/
+/*.log
+
+# --- Model weights or large files ---
 *.pt
-__pycache__/
+data/
+
+# --- System / IDE ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- AWS credentials or keys ---
+*.pem
+
+# --- Misc ---
+*.bak
+*.tmp
