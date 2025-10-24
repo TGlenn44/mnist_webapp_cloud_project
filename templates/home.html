@@ -1,4 +1,16 @@
 {% extends "base.html" %} {% block content %}
 <h2>MNIST Web App</h2>
-<p>Next: accounts, uploads, inference.</p>
-{% endblock %}
+
+{% if user.is_authenticated %}
+<p>Hello {{ user.username }}!</p>
+<p>Welcome to the digit classifier with neural network cloud application.</p>
+<p>
+  Click "Upload" to get started, and go to "My files" to view, classify, or
+  delete your uploaded images.
+</p>
+{% else %}
+<p>
+  Welcome! Please <a href="{% url 'login' %}">log in</a> or
+  <a href="{% url 'register' %}">register</a>.
+</p>
+{% endif %} {% endblock %}

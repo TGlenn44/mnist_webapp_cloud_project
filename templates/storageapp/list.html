@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<h2>My files</h2>
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Preview</th>
+    <th>File</th>
+    <th>Uploaded</th>
+    <th>Result</th>
+    <th>Actions</th>
+  </tr>
+
+  {% for it in items %}
+  <tr>
+    <td>
+      <a href="{{ it.file.url }}" target="_blank" rel="noopener">
+        <img
+          src="{{ it.file.url }}"
+          alt="{{ it.filename }}"
+          style="height: 64px; width: 64px; object-fit: contain"
+        />
+      </a>
+    </td>
+    <td><a href="{{ it.file.url }}" target="_blank">{{ it.filename }}</a></td>
+    <td>{{ it.created_at|date:"Y-m-d H:i" }}</td>
+    <td>
+      {% if it.predicted %} {{ it.predicted }} ({{ it.prob|floatformat:3 }})
+      {{ it.model_used }} {% else %} - {% endif %}
+    </td>
+    <td>
+      <a href="{% url 'classify_cnn' it.pk %}">Classify (CNN)</a> |
+      <a href="{% url 'classify_fc' it.pk %}">Classify (FC)</a> |
+      <a href="{% url 'delete' it.pk %}">Delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="5">No files yet.</td>
+  </tr>
+  {% endfor %}
+</table>
+<p><a href="{% url 'upload' %}">Upload more</a></p>
+{% endblock %}
